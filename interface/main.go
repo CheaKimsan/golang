@@ -6,23 +6,24 @@ type Sound interface {
 	Sound() string
 }
 
-type Animal struct {
-	cat string
-	dog string
+type Cat struct{}
+
+func (Cat) Sound() string {
+	return "Meow"
 }
 
-func (a Animal) Sound() string {
-	return a.dog
+type Dog struct{}
+
+func (Dog) Sound() string {
+	return "Woof"
 }
 
 func main() {
-	a := Animal{
-		cat: "Meow",
-		dog: "Woof",
-	}
+	var s Sound
 
-	var s Sound = a
+	s = Cat{}
+	fmt.Println(s.Sound())
 
+	s = Dog{}
 	fmt.Println(s.Sound())
 }
-package 
