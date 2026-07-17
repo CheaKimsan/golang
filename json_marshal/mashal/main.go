@@ -3,6 +3,7 @@ package main
 import (
 	"encoding/json"
 	"fmt"
+	"os"
 )
 
 type Student struct {
@@ -19,9 +20,15 @@ type User struct {
 	Permissions []string `json : "roles"`
 }
 
+type Person struct {
+	Name   string `json: "username"`
+	Age    int    `json: "age"`
+	Active bool   `json: "is_active"`
+}
+
 func main() {
 
-	// Mashal Json
+	Mashal Json
 	u := User{
 		ID:          001,
 		Name:        "User A",
@@ -43,7 +50,7 @@ func main() {
 		"subjects": ["MIS", "Computer Science"]
 	}`
 
-	// Unmashal json
+	Unmashal json
 	var stu Student
 
 	error := json.Unmarshal([]byte(jsonData), &stu)
@@ -54,4 +61,29 @@ func main() {
 	fmt.Println("Name:", stu.Name)
 	fmt.Println("Age:", stu.Age)
 	fmt.Println("Subjects:", stu.Subjects)
+
+	// Encoded Json
+	p := Person{
+		Name:   "Chea Kimsan",
+		Age:    21,
+		Active: true,
+	}
+	f, err := os.Create("output.json")
+	if err != nil {
+		fmt.Println("Error creating file : ", err)
+		panic(err)
+	}
+
+	defer f.Close()
+
+	encoder := json.NewEncoder(f)
+
+	err = encoder.Encode(&p)
+	if err != nil {
+		fmt.Println("error encoding person : ", err)
+		panic(err)
+	}
+
+	fmt.Println(p)
+
 }
