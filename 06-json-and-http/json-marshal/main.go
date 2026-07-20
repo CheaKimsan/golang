@@ -28,7 +28,7 @@ type Person struct {
 
 func main() {
 
-	Mashal Json
+	// Mashal Json
 	u := User{
 		ID:          001,
 		Name:        "User A",
@@ -50,7 +50,7 @@ func main() {
 		"subjects": ["MIS", "Computer Science"]
 	}`
 
-	Unmashal json
+	// Unmashal json
 	var stu Student
 
 	error := json.Unmarshal([]byte(jsonData), &stu)
